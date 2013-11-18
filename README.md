@@ -11,6 +11,9 @@ selecting the latest stable (and unstable) versions, as well as matching the
 version list against a [semver
 range](https://npmjs.org/doc/misc/semver.html#Ranges).
 
+node-version-resolver's functionality is also available as an HTTP webservice
+at [semver.io][http://semver.io].
+
 ## Installation
 
 ```
