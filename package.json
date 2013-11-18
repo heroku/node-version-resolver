@@ -1,6 +1,6 @@
 {
   "name": "node-version-resolver",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Give me a semver range and I'll tell you the latest node version that satisfies it.",
   "main": "index.coffee",
   "bin": {
