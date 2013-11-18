@@ -19,15 +19,15 @@ npm install node-version-resolver --save
 
 ## Command-Line Usage
 
-# Pass a [semver range](https://npmjs.org/doc/misc/semver.html#Ranges)
-# argument to find what version of Node.js currently satisfies it:
+Pass a [semver range](https://npmjs.org/doc/misc/semver.html#Ranges) argument
+to find what version of Node.js currently satisfies it:
 
 ```sh
 node-version-resolver 0.10.x
 # 0.10.22
 ```
 
-# Or, omit the argument to get the latest stable verison:
+Or omit the argument to get the latest stable version:
 
 ```sh
 node-version-resolver
