@@ -1,0 +1,42 @@
+{
+  "name": "node-version-resolver",
+  "version": "0.1.0",
+  "description": "Give me a semver range and I'll tell you the latest node version that satisfies it.",
+  "main": "index.coffee",
+  "bin": {
+    "node-version-resolver": "index.coffee",
+    "nvr" : "index.coffee"
+  },
+  "scripts": {
+    "test": "mochaNODE_ENV=test mocha --compilers coffee:coffee-script",
+    "updateCache": "curl http://nodejs.org/dist/ > cache/node.html"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:heroku/node-version-resolver.git"
+  },
+  "keywords": [
+    "node",
+    "npm",
+    "versions",
+    "semver"
+  ],
+  "author": "zeke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heroku/node-version-resolver/issues"
+  },
+  "dependencies": {
+    "semver": "~2.1.0",
+    "coffee-script": "~1.6.3",
+    "superagent": "~0.15.4",
+    "lodash": "~2.3.0",
+    "array-sugar": "~0.2.4"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0"
+  }
+}
