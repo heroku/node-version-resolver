@@ -8,7 +8,7 @@
     "nvr" : "index.coffee"
   },
   "scripts": {
-    "test": "mochaNODE_ENV=test mocha --compilers coffee:coffee-script",
+    "test": "mocha --compilers coffee:coffee-script",
     "updateCache": "curl http://nodejs.org/dist/ > cache/node.html"
   },
   "directories": {
