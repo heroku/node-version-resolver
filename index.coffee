@@ -10,23 +10,25 @@ module.exports = class Resolver
 
   # Keep the timeout really short so tests will use the cached
   # file instead of hitting the network.
-  @timeout: (if process.env.NODE_ENV is 'test' then 1 else 1000)
+  @timeout: (if process.env.NODE_ENV is 'production' then 1000 else 1)
 
   constructor: (cb) ->
 
     @downloadVersions (err, text) =>
-      return console.error("err", err) if err
+      throw err if err
 
       # Extract and sort version numbers from HTML text
-      @all = _.uniq(text.
-        match(/[0-9]+\.[0-9]+\.[0-9]+/g).
-        sort (a,b) -> semver.compare(a, b)
+      @all = _.uniq(text
+        .match(/[0-9]+\.[0-9]+\.[0-9]+/g)
+        .filter((version) -> semver.gte(version, "0.8.6"))
+        .sort((a,b) -> semver.compare(a, b))
       )
 
       # Stable releases have even-numbered minor versions
-      @stables = _.uniq(text.
-        match(/[0-9]+\.[0-9]*[02468]\.[0-9]+/g).
-        sort (a,b) -> semver.compare(a, b)
+      @stables = _.uniq(text
+        .match(/[0-9]+\.[0-9]*[02468]\.[0-9]+/g)
+        .filter((version) -> semver.gte(version, "0.8.6"))
+        .sort((a,b) -> semver.compare(a, b))
       )
 
       # take any versions greater than the override out of the stables array
@@ -48,7 +50,7 @@ module.exports = class Resolver
 
   satisfy: (range) ->
     # If input is funky, default to latest stable
-    return @latest_stable unless semver.validRange(range)
+    return @latest_stable if !semver.validRange(range)
 
     semver.maxSatisfying(@stables, range) or
       semver.maxSatisfying(@all, range) or

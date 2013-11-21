@@ -29,19 +29,21 @@ describe "Resolver", ->
       assert.equal typeof(r.latest_unstable), "string"
 
     it "defaults to latest stable version when given crazy input", ->
-      assert.equal r.latest_stable, r.satisfy(null)
-      assert.equal r.latest_stable, r.satisfy(undefined)
-      assert.equal r.latest_stable, r.satisfy("")
-      assert.equal r.latest_stable, r.satisfy("boogers")
-      # assert.equal r.latest_stable, r.satisfy("0.0")
-      # assert.equal r.latest_stable, r.satisfy("2.0")
+      assert.equal r.satisfy(null), r.latest_stable
+      assert.equal r.satisfy(undefined), r.latest_stable
+      assert.equal r.satisfy(""), r.latest_stable
+      assert.equal r.satisfy("boogers"), r.latest_stable
+
+    it "only includes version >=0.8.6", ->
+      assert.equal r.all[0], '0.8.6'
+      assert r.all.every (version) -> semver.gte(version, '0.8.6')
 
   describe "satisfy()", ->
 
     it "honors explicit version strings", ->
       assert.equal r.satisfy("0.10.1"), "0.10.1"
       assert.equal r.satisfy("0.11.1"), "0.11.1"
-      assert.equal r.satisfy("0.4.5"), "0.4.5"
+      assert.equal r.satisfy("0.8.15"), "0.8.15"
 
     it "matches common patterns to stable version", ->
       assert.equal r.satisfy("0.10.x"), r.latest_stable
@@ -55,6 +57,9 @@ describe "Resolver", ->
       assert.equal r.satisfy("~0.11.0"), r.latest_unstable
       assert.equal r.satisfy(">0.11.0"), r.latest_unstable
       assert.equal r.satisfy(">=0.10.100"), r.latest_unstable
+
+    it "returns latest stable for versions that are too old", ->
+      assert.equal r.satisfy("0.4.1"), r.latest_stable
 
   describe "override", ->
 
