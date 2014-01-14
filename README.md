@@ -12,7 +12,7 @@ version list against a [semver
 range](https://npmjs.org/doc/misc/semver.html#Ranges).
 
 node-version-resolver's functionality is also available as an HTTP webservice
-at [semver.io][http://semver.io].
+at [semver.io](https://semver.io).
 
 ## Installation
 
