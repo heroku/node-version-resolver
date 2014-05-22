@@ -1,4 +1,3 @@
-
 # node-version-resolver
 
 > Give me a semver range and I'll tell you the latest node version that
@@ -13,6 +12,10 @@ range](https://npmjs.org/doc/misc/semver.html#Ranges).
 
 node-version-resolver's functionality is also available as an HTTP webservice
 at [semver.io](https://semver.io).
+
+**Note**: `0.8.6` is the oldest available version of node returned by this library.
+This choice was made because nodejs.org does not provide builds of older
+versions.
 
 ## Installation
 
