@@ -9,7 +9,7 @@ _ = require 'lodash'
 module.exports = class Resolver
 
   # Use a 1ms timeout to keep tests from hitting the network.
-  @timeout: (if process.env.NODE_ENV is 'test' then 1 else 1000)
+  @timeout: (if process.env.NODE_ENV is 'test' then 1 else 5000)
 
   constructor: (cb) ->
 
