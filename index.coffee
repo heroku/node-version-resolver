@@ -9,7 +9,7 @@ _ = require 'lodash'
 module.exports = class Resolver
 
   # Use a 1ms timeout to keep tests from hitting the network.
-  @timeout: (if process.env.NODE_ENV is 'test' then 1 else 5000)
+  @timeout: (if process.env.NODE_ENV is 'test' then 1 else (process.env.RESOLVER_TIMEOUT || 5000))
 
   constructor: (cb) ->
 
@@ -44,7 +44,7 @@ module.exports = class Resolver
   downloadVersions: (cb) ->
     agent.get("http://nodejs.org/dist/").timeout(Resolver.timeout).end (err, res) ->
       # Use the cached file if request timed out.
-      return cb null, fs.readFileSync('./cache/node.html').toString() if err
+      return cb null, fs.readFileSync(__dirname + '/cache/node.html').toString() if err
       cb null, res.text
 
   satisfy: (range) ->
